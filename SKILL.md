@@ -49,6 +49,11 @@ Symfony Mailer (drupal/symfony_mailer) :
 | Mailgun transport | `MAILER_DSN=mailgun+api://KEY:DOMAIN@default` | [smtp-config.md](smtp-config.md) |
 | Previewer les emails dans l'admin | Symfony Mailer → Preview | [email-testing.md](email-testing.md) |
 | Migrer depuis hook_mail legacy | Symfony Mailer compatibility bridge | [symfony-mailer-setup.md](symfony-mailer-setup.md) |
+| Configurer SPF (authorized senders) | DNS TXT `v=spf1 include:sendgrid.net ~all` | [email-deliverability.md](email-deliverability.md) |
+| Configurer DKIM (signature emails) | DNS CNAME depuis le dashboard du provider SMTP | [email-deliverability.md](email-deliverability.md) |
+| Configurer DMARC (politique compliance) | DNS TXT `_dmarc.mon-site.com` | [email-deliverability.md](email-deliverability.md) |
+| Tester le score de délivrabilité | mail-tester.com, MX Toolbox | [email-deliverability.md](email-deliverability.md) |
+| Gérer les bounces (emails invalides) | Return-Path + API provider SMTP | [email-deliverability.md](email-deliverability.md) |
 
 ## Anti-Patterns Critiques
 
