@@ -38,3 +38,17 @@ Problèmes d'emails Drupal découverts en projet réel.
 - **Cause :** Le collecteur de test n'était pas configuré avant l'action qui déclenche l'email
 - **Correct :** Configurer dans `setUp()` : `\Drupal::configFactory()->getEditable('system.mail')->set('interface.default', 'test_mail_collector')->save();`
 - **Prévention :** Pattern systématique : configurer le collecteur en PREMIER dans `setUp()`, avant tout autre code
+
+### 2026-05-16 — Images cassées dans Outlook — chemins relatifs
+
+- **Symptôme :** Images visibles dans Gmail, cassées dans Outlook
+- **Cause :** URLs d'images relatives (`/sites/default/files/...`) au lieu d'URLs absolues
+- **Correct :** `{{ absolute_url(image_url) }}` dans le template Twig email
+- **Prévention :** Règle : toutes les URLs d'images dans les emails doivent être absolues
+
+### 2026-05-16 — Email envoyé depuis le mauvais expéditeur
+
+- **Symptôme :** FROM = `admin@site.com` au lieu de `noreply@site.com`
+- **Cause :** FROM non configuré dans l'EmailBuilder → utilise le FROM global Drupal (email admin)
+- **Correct :** `$email->setFrom('noreply@site.com', 'Mon Site');` dans EmailBuilder::build()
+- **Prévention :** Configurer le FROM globalement dans `/admin/config/system/mailer` ET vérifier par EmailBuilder
